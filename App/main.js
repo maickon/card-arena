@@ -127,7 +127,7 @@ class Main {
 			HTML += `
 			<div class="deck" data-id="${deck.id}" data-name="${deck.name}">
 				<span>${deck.name}</span>
-				<img src="${deck.url}.jpg">
+				<img src="${deck.url}.png">
 			</div>
 			`;
 		});
@@ -160,6 +160,5 @@ class Main {
 		});
     	document.querySelector(`.${menu}`).classList.add('fadein');
     	document.querySelector(`.${menu}`).style.display ='flex';
-    	// document.querySelector(`.${menu}`).removeAttribute('style');
 	}
 }

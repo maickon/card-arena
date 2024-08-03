@@ -1,0 +1,21 @@
+{
+  "name": "Card Arena",
+  "short_name": "Card Arena",
+  "description": "Desafie seus oponentes com o Card Arena!",
+  "start_url": "/card-arena/index.html",
+  "display": "standalone",
+  "background_color": "#000",
+  "theme_color": "#b8995f",
+  "icons": [
+    {
+      "src": "/card-arena/assets/img/images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/card-arena/assets/img/images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

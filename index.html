@@ -14,7 +14,8 @@
 	<script type="text/javascript" src="/card-arena/App/races/orcs.js"></script>
 	<script type="text/javascript" src="/card-arena/App/races/vampires.js"></script>
 	<link rel="stylesheet" type="text/css" href="/card-arena/assets/css/style.css">
-	<link rel="icon" type="image/jpg" href="/card-arena/assets/img/images/icon.jpg">   
+	<link rel="icon" type="image/jpg" href="/card-arena/assets/img/images/icon.jpg">
+	<link rel="manifest" href="/card-arena/manifest.json">
 </head>
 <body>
 	<div id="rules">
@@ -23,7 +24,9 @@
 	<div id="config">
 		<img src="/card-arena/assets/img/images/config.png">
 	</div>
-
+	<div id="install">
+		<img src="https://icon-library.com/images/installer-icon/installer-icon-28.jpg">
+	</div>
 	<div class="container">
 		<div class="gameTitle">[<span id="mydecksize">-</span>] Meu Grimório (<span id="mydeck"></span>)</div>
 
@@ -131,6 +134,7 @@
 
 	<script type="text/javascript">
 		let MAXCARDS_DECK = 20;
+		
 		if(localStorage.getItem('decksize') != undefined) {
 			MAXCARDS_DECK = localStorage.getItem('decksize');
 			document.querySelector("#mydecksize").innerHTML = MAXCARDS_DECK;
@@ -250,6 +254,33 @@
 	        	window.location.reload();
 	        });
         });
+	</script>
+
+	<script src="/card-arena/app.js"></script>
+
+	<script>
+		let deferredPrompt;
+		const installMenu = document.querySelector("#install");
+
+		window.addEventListener('beforeinstallprompt', (e) => {
+		console.log('beforeinstallprompt');
+		  e.preventDefault();
+		  deferredPrompt = e;
+		  installMenu.style.display = 'block';
+
+		  installMenu.addEventListener('click', () => {
+		  	console.log('teste');
+		    deferredPrompt.prompt();
+		    deferredPrompt.userChoice.then((choiceResult) => {
+		      if (choiceResult.outcome === 'accepted') {
+		        console.log('Usuário aceitou a instalação');
+		      } else {
+		        console.log('Usuário recusou a instalação');
+		      }
+		      deferredPrompt = null;
+		    });
+		  });
+		});
 	</script>
 </body>
 </html>
