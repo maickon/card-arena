@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Card Arena</title>
+	<script type="text/javascript" src="/App/config.js"></script>
+	<script type="text/javascript" src="/App/main.js"></script>
+	<script type="text/javascript" src="/App/races/angels.js"></script>
+	<script type="text/javascript" src="/App/races/demons.js"></script>
+	<script type="text/javascript" src="/App/races/dwarves.js"></script>
+	<script type="text/javascript" src="/App/races/elfs.js"></script>
+	<script type="text/javascript" src="/App/races/humans.js"></script>
+	<script type="text/javascript" src="/App/races/monsters.js"></script>
+	<script type="text/javascript" src="/App/races/orcs.js"></script>
+	<script type="text/javascript" src="/App/races/vampires.js"></script>
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+	<link rel="icon" type="image/jpg" href="/assets/img/images/icon.jpg">   
+</head>
+<body>
+	<div id="rules">
+		<img src="/assets/img/images/rules.png">
+	</div>
+	<div id="config">
+		<img src="/assets/img/images/config.png">
+	</div>
+
+	<div class="container">
+		<div class="gameTitle">Meu Grimório (<span id="mydeck"></span>)</div>
+
+		<div id="card">
+			<div class="back"></div>
+			<div class="top">
+				<div class="sphere life" contenteditable="true">22</div>
+				<div class="sphere damage" contenteditable="true">+3</div>
+				<div class="card-name-container">
+					<div class="card-name">NOME DA CARTA</div>
+				</div>
+				<div class="image">
+					<img src="/cards/1.png">
+				</div>
+				<div class="race">CONTEXTO DA CARTA</div>
+				<div class="description">
+					<div>
+						<span class="helth"></span>
+						<span class="text"></span>
+					</div>
+					<span class="especial"></span>
+				</div>
+			</div>
+		</div>
+
+		<nav id="controls">
+			<div class="shuffle">Embaralhar</div>
+			<div class="facetop">Manter virado</div>
+			<div class="next">Próxima</div>
+		</nav>
+	</div>
+
+	<div class="modal">
+		<div>
+			<div class="close">X</div>
+			<div class="rules">
+				<div class="header">
+					<h1>Regras</h1>
+					<img src="/assets/img/images/icon.jpg" width="50" height="50">
+				</div>
+				<div class="body">
+					<p>Card Arena é um jogo simples para celular onde seus jogadores vão sacar cartas do top do seu baralho e confronta-las.</p>
+					<h4>Como funciona</h4>
+					<p>Cada carta possui seu valor de vida, dano e descrição. A vida é o valor pulsante na esfera verde. O dano é o outro valor pulsante na esfera vermelha. Abaixo temos a descrição do tipo da criatura. No topo temos o nome da carta. E na parte inferior temos a descrição dos efeitos da carta.</p>
+					<p>Quando as cartas são reveladas, embos os jogadores executam a mesma ação juntos. Se for um ataque os jogadores já calculam o dano sofrido em cada carta. Se um jogador se curar e outro atacar, ambos já calculam o valor da vida final. E o mesmo vale para ações especiais.</p>
+					<p>Cada jogador deve embaralhar o seu grimório e exibir a carta do topo para confronta-las. Durante o confronto cada jogador escolhe uma ação. Existem apenas três tipos de ações:</p>
+					<ul>
+						<li>ATACAR</li>
+						<li>CURAR-SE</li>
+						<li>ESPECIAL</li>
+					</ul>
+					<h4>ATACAR</h4>
+					<p>Para atacar o jogar deve somar 1d6 mais o valor de dano especificado na carta. Este valor reduz a vida da carta do seu oponente.</p>
+					<h4>CURAR-SE</h4>
+					<p>Uma carta só pode se curar se esta habilidade vir descrita na carta. Caso ela não exista, o jogador não poderá se curar.</p>
+					<h4>ESPECIAL</h4>
+					<p>Esta é uma ação que também só poderá ser executada caso venha descrita na carta. Uma habilidade especial é algo que concede uma grande vantagem.</p>
+					<h4>Rodadas</h4>
+					<p>Após o confronto, se nenhuma carta estiver sido derrotada (sua vida chegado a 0 ou menos pontos). Iniciamos uma nova rodada de combate entre as mesmas cartas. Quando uma das cartas é derrotada a rodada termina e devemos iniciar uma nova rodada.</p>
+					<h4>A nova rodada</h4>
+					<p>No inicio de uma nova rodada. O jogador vencedor do combate tem direito a realizar uma ação de CURA ou ESPECIAL a sua escolha antes de novo combate. O jogador derrotada deve secar uma nova carta do topo do seu grimório para iniciar um novo combate.</p>
+					<p>O combate se inicia e o processo se repete até que as cartas do grimório de um jogador termine. Quando um jogador não tiver mais cartas para jogar, ele será definitivamente derrotado.</p>
+				</div>
+			</div>
+			<div class="config">
+				<h1>Escolha seu grimório</h1>
+				<div class="decks" id="decks"></div>
+			</div>
+			<div class="youlose">
+				<h1>Você Perdeu!</h1>
+				<p>Sua derrota ainda não é o fim! Inicie um próximo desafio.</p>
+				<a href="/" class="button">COMEÇAR</a>
+			</div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		const MAXCARDS_DECK = 3;
+		const App = new Main();
+		let position = 0;
+		let deckname = localStorage.getItem('deckname');
+		let facetop = false;
+
+		App.setDecklist('monsters');
+
+		if (deckname != undefined) {
+			App.setDecklist(deckname);
+			deck = App.decklist;
+		}
+
+		document.querySelector("#mydeck").innerHTML = (deckname == undefined) ? '' : deckname;
+
+		App.changeCard(0);
+
+		document.querySelector("#controls .facetop").addEventListener('click', () => {
+			if (facetop == true) {
+				facetop = false;
+				document.querySelector('.top').style.transform = 'rotateY(180deg)';
+				document.querySelector('.top').style.opacity = '0';
+				document.querySelector('.top').removeAttribute('style');
+
+				document.querySelector('.top img').style.transform = 'rotateY(180deg)';
+				document.querySelector('.top img').style.opacity = '0';
+				document.querySelector('.top img').removeAttribute('style');
+
+				document.querySelector('.back').style.transform = 'rotateY(0deg)';
+				document.querySelector('.back').style.opacity = '1';
+				document.querySelector('.back').removeAttribute('style');
+				document.querySelector("#controls .facetop").innerHTML = 'Manter Virado';		
+			} else {
+				facetop = true;
+				document.querySelector('.top').style.transform = 'rotateY(0deg)';
+				document.querySelector('.top').style.opacity = '1';
+
+				document.querySelector('.top img').style.transform = 'rotateY(0deg)';
+				document.querySelector('.top img').style.opacity = '1';
+
+				document.querySelector('.back').style.transform = 'rotateY(180deg)';
+				document.querySelector('.back').style.opacity = '0';
+				document.querySelector("#controls .facetop").innerHTML = 'Manter Fechado';		
+			}
+		});
+
+		document.querySelector("#controls .shuffle").addEventListener('click', () => {
+			deck = App.shuffleArray(deck);
+			App.changeCard(0);
+			App.toggleTransition();
+		});
+
+		document.querySelector("#controls .next").addEventListener('click', () => {
+			if (position >= deck.length-1) {
+				document.querySelector('.modal').classList.add('fadein');
+				document.querySelector('.rules').style.display = 'none';
+				document.querySelector('.config').style.display = 'none';
+				document.querySelector('.youlose').style.display = 'flex';
+				position = 0;
+			} else {
+				position++;
+				App.changeCard(position);
+				App.toggleTransition();
+			}
+		});
+
+		document.querySelector('.close').addEventListener('click', function() {
+			document.querySelector('.modal').classList.remove('fadein');
+			document.querySelector('.modal').classList.add('fadeout');
+		});
+		
+		document.querySelector('#rules').addEventListener('click', function() {
+			document.querySelector('.modal').classList.add('fadein');
+			document.querySelector('.modal').classList.remove('fadeout');
+			document.querySelector('.rules').style.display = 'block';
+			document.querySelector('.youlose').style.display = 'none';
+			document.querySelector('.config').style.display = 'none';
+		});
+
+		document.querySelector('#config').addEventListener('click', function() {
+			document.querySelector('.modal').classList.add('fadein');
+			document.querySelector('.modal').classList.remove('fadeout');
+			document.querySelector('.rules').style.display = 'none';
+			document.querySelector('.youlose').style.display = 'none';
+			document.querySelector('.config').style.display = 'block';
+			App.setDecks();
+		});
+	</script>
+</body>
+</html>
