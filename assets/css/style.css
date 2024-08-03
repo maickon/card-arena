@@ -61,6 +61,7 @@ body:before {
 	background: #000;
 	border-radius: 5px;
 	margin: 10px;
+	overflow: hidden;
 }
 #card .top, #card .back {
 	border-radius: 5px;
@@ -75,11 +76,40 @@ body:before {
 	display: flex;
 	gap: 5px;
 	flex-direction: column;
-	background: #FFF;
-	background-image: url(/card-arena/assets/img/images/bg.png);
+	background: #000;
+	background-image: url(/card-arena/assets/img/images/bg0.gif);
 	background-size: 100% 100%;
 	padding: 10px;
 	box-sizing: border-box;
+	z-index: 1;
+}
+.top::before {
+	content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url(/card-arena/assets/img/images/bg.png);
+    background-size: 100% 100%;
+    z-index: -1;
+    opacity: 0.5;
+    animation: bgAnimation 5s infinite;
+}
+@keyframes bgAnimation {
+    0% {
+        opacity: 0.4;
+        background-size: 100% 100%;
+    }
+    50% {
+        opacity: 0.4
+        background-position: center;
+        background-size: 102% 102%;
+    }
+    100% {
+        opacity: 0.4;
+        background-size: 100% 100%;
+    }
 }
 .image {
 	height: 270px;

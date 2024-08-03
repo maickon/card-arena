@@ -39,6 +39,6 @@ Após o confronto, se nenhuma carta tiver sido derrotada (sua vida chegado a 0 o
 
 #### A nova rodada
 
-No início de uma nova rodada, o jogador vencedor do combate tem direito a realizar uma ação de CURA ou ESPECIAL à sua escolha antes de novo combate. O jogador derrotado deve sacar uma nova carta do topo do seu grimório para iniciar um novo combate.
+No inicio de uma nova rodada. O jogador vencedor do combate tem direito a realizar uma ação de CURA ou ESPECIAL (caso a carta possua a descrição) a sua escolha antes de novo combate. O jogador derrotada deve revelar uma nova carta do topo do seu grimório para iniciar um novo combate.
 
 O combate se inicia e o processo se repete até que as cartas do grimório de um jogador terminem. Quando um jogador não tiver mais cartas para jogar, ele será definitivamente derrotado.

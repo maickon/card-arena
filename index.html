@@ -89,7 +89,7 @@
 					<h4>Rodadas</h4>
 					<p>Após o confronto, se nenhuma carta estiver sido derrotada (sua vida chegado a 0 ou menos pontos). Iniciamos uma nova rodada de combate entre as mesmas cartas. Quando uma das cartas é derrotada a rodada termina e devemos iniciar uma nova rodada.</p>
 					<h4>A nova rodada</h4>
-					<p>No inicio de uma nova rodada. O jogador vencedor do combate tem direito a realizar uma ação de CURA ou ESPECIAL a sua escolha antes de novo combate. O jogador derrotada deve secar uma nova carta do topo do seu grimório para iniciar um novo combate.</p>
+					<p>No inicio de uma nova rodada. O jogador vencedor do combate tem direito a realizar uma ação de CURA ou ESPECIAL (caso a carta possua a descrição) a sua escolha antes de novo combate. O jogador derrotada deve revelar uma nova carta do topo do seu grimório para iniciar um novo combate.</p>
 					<p>O combate se inicia e o processo se repete até que as cartas do grimório de um jogador termine. Quando um jogador não tiver mais cartas para jogar, ele será definitivamente derrotado.</p>
 				</div>
 				<div class="decks">
@@ -203,6 +203,7 @@
 				position = 0;
 			} else {
 				position++;
+				document.querySelector("#mydecksize").innerHTML = MAXCARDS_DECK - position;
 				App.changeCard(position);
 				App.toggleTransition();
 			}
