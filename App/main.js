@@ -3,7 +3,7 @@ class Main {
 	decklist = null;
 
 	races() {
-		const path = '/assets/img/decks/';
+		const path = '/card-arena/assets/img/decks/';
 		const races = [
 			{id: 'angels', name: 'Anjos'},
 			{id: 'demons', name: 'Demônios'},
@@ -56,7 +56,7 @@ class Main {
 	gainLife() {
 		let cure = this.rand(3, 10);
 		let chance = this.rand(1, 50);
-		let path = '/assets/img/images/cure.png';
+		let path = '/card-arena/assets/img/images/cure.png';
 		if(chance >= 30) {
 			return `<img src="${path}" class="icon-helth">${cure}`;
 		} else {
@@ -66,7 +66,7 @@ class Main {
 
 	gainEspecial() {
 		let races = ['Elfos','Orcs','Humanos','Monstros'];
-		let path = '/assets/img/images/especial.png';
+		let path = '/card-arena/assets/img/images/especial.png';
 		let especial = [
 			'Aumente +{x} de dano.',
 			'Aumente +{x} de vida.',
