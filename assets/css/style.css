@@ -72,6 +72,8 @@ body:before {
 	transition: transform 0.5s, opacity 0.5s;
 }
 #card .top {
+	will-change: transform;
+  	transform-style: preserve-3d;
 	transform: rotateY(180deg);
 	display: flex;
 	gap: 5px;
@@ -176,16 +178,22 @@ body:before {
 	background: url(/card-arena/assets/img/images/back.png);
 	background-size: 100% 100%;
 	transform: rotateY(0deg);
+	will-change: transform;
+  	transform-style: preserve-3d;
 	opacity: 1;
 	z-index: 2;
 }
 
 #card:hover .top, #card:hover .top img {
 	transform: rotateY(0deg);
+	will-change: transform;
+  	transform-style: preserve-3d;
 	opacity: 1;
 }
 #card:hover .back {
 	transform: rotateY(180deg);
+	will-change: transform;
+  	transform-style: preserve-3d;
 	opacity: 0;
 }
 .hide {
@@ -198,6 +206,8 @@ body:before {
 }
 .spin360 {
 	transform: rotateY(360deg);
+	will-change: transform;
+  	transform-style: preserve-3d;
 	transition: transform 0.5s;
 }
 .gameTitle {
@@ -423,6 +433,7 @@ body:before {
 	transition: 0.5s;
 	cursor: pointer;
 	z-index: 99;
+	display: none;
 }
 .decks h1 {
 	font-family: 'Mairon', sans-serif;

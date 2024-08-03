@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="/card-arena/App/races/orcs.js"></script>
 	<script type="text/javascript" src="/card-arena/App/races/vampires.js"></script>
 	<link rel="stylesheet" type="text/css" href="/card-arena/assets/css/style.css">
-	<link rel="icon" type="image/jpg" href="/card-arena/assets/img/images/icon.jpg">
+	<link rel="icon" type="image/png" href="/card-arena/assets/img/images/icon.png">
 	<link rel="manifest" href="/card-arena/manifest.json">
 </head>
 <body>
@@ -25,10 +25,10 @@
 		<img src="/card-arena/assets/img/images/config.png">
 	</div>
 	<div id="install">
-		<img src="https://icon-library.com/images/installer-icon/installer-icon-28.jpg">
+		<img src="/card-arena/assets/img/images/install.png">
 	</div>
 	<div class="container">
-		<div class="gameTitle">[<span id="mydecksize">-</span>] Meu Grimório (<span id="mydeck"></span>)</div>
+		<div class="gameTitle">[<span id="mydecksize">-</span>] Meu Grimório (<span id="mydeck">-</span>)</div>
 
 		<div id="card">
 			<div class="back"></div>
@@ -70,7 +70,7 @@
 			<div>
 				<div class="rules">
 					<div class="header">
-						<img src="/card-arena/assets/img/images/icon.jpg" width="50" height="50">
+						<img src="/card-arena/assets/img/images/icon.png" width="50" height="50">
 						<h1>Regras</h1>
 					</div>
 					<p>Card Arena é um jogo simples para celular onde seus jogadores vão sacar cartas do top do seu baralho e confronta-las.</p>
@@ -263,23 +263,22 @@
 		const installMenu = document.querySelector("#install");
 
 		window.addEventListener('beforeinstallprompt', (e) => {
-		console.log('beforeinstallprompt');
-		  e.preventDefault();
-		  deferredPrompt = e;
-		  installMenu.style.display = 'block';
+			e.preventDefault();
+			deferredPrompt = e;
+			installMenu.style.display = 'block';
 
-		  installMenu.addEventListener('click', () => {
-		  	console.log('teste');
-		    deferredPrompt.prompt();
-		    deferredPrompt.userChoice.then((choiceResult) => {
-		      if (choiceResult.outcome === 'accepted') {
-		        console.log('Usuário aceitou a instalação');
-		      } else {
-		        console.log('Usuário recusou a instalação');
-		      }
-		      deferredPrompt = null;
-		    });
-		  });
+			console.log('beforeinstallprompt', deferredPrompt);
+		  	installMenu.addEventListener('click', () => {
+			    deferredPrompt.prompt();
+			    deferredPrompt.userChoice.then((choiceResult) => {
+			    	if (choiceResult.outcome === 'accepted') {
+			        	console.log('Usuário aceitou a instalação');
+			      	} else {
+			        	console.log('Usuário recusou a instalação');
+			      	}
+			      	deferredPrompt = null;
+			    });
+		  	});
 		});
 	</script>
 </body>

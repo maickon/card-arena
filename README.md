@@ -5,7 +5,7 @@ Um simples card game feito por diversão.
 # Regras
 
 
-<img src="https://maickon.github.io/card-arena/assets/img/images/icon.jpg" alt="Card Arena" width="100" height="100">
+<img src="https://maickon.github.io/card-arena/assets/img/images/icon.png" alt="Card Arena" width="100" height="100">
 
 Card Arena é um jogo simples para celular onde seus jogadores vão sacar cartas do top do seu baralho e confrontá-las.
 
