@@ -19,7 +19,7 @@ let dwarves = [
   },
   {
     "name": "Dwalin o Guardião",
-    "image": "https://image.cdn2.seaart.ai/static/41d12b5bedfddca7be2e08433d585376/1708307662513/7bc143a674d57f874932c961da2f45fb.jpeg",
+    "image": "https://image.cdn2.seaart.ai/2023-08-19/14746423785460741/03e42aeda3185917750db684338838ee6fcb7a7f_high.webp",
     "race": "Anão",
     "description": "Defensor incansável das montanhas, nunca abandona seu posto."
   },

@@ -25,7 +25,7 @@
 	</div>
 
 	<div class="container">
-		<div class="gameTitle">Meu Grimório (<span id="mydeck"></span>)</div>
+		<div class="gameTitle">[<span id="mydecksize">-</span>] Meu Grimório (<span id="mydeck"></span>)</div>
 
 		<div id="card">
 			<div class="back"></div>
@@ -59,12 +59,17 @@
 	<div class="modal">
 		<div>
 			<div class="close">X</div>
-			<div class="rules">
-				<div class="header">
-					<h1>Regras</h1>
-					<img src="/card-arena/assets/img/images/icon.jpg" width="50" height="50">
-				</div>
-				<div class="body">
+			<div id="menu">
+				<div id="menu-decks" data-menu="decks">Decks</div>
+				<div id="menu-rules" data-menu="rules">Regras</div>
+				<div id="menu-games" data-menu="game">Jogo</div>
+			</div>
+			<div>
+				<div class="rules">
+					<div class="header">
+						<img src="/card-arena/assets/img/images/icon.jpg" width="50" height="50">
+						<h1>Regras</h1>
+					</div>
 					<p>Card Arena é um jogo simples para celular onde seus jogadores vão sacar cartas do top do seu baralho e confronta-las.</p>
 					<h4>Como funciona</h4>
 					<p>Cada carta possui seu valor de vida, dano e descrição. A vida é o valor pulsante na esfera verde. O dano é o outro valor pulsante na esfera vermelha. Abaixo temos a descrição do tipo da criatura. No topo temos o nome da carta. E na parte inferior temos a descrição dos efeitos da carta.</p>
@@ -87,22 +92,48 @@
 					<p>No inicio de uma nova rodada. O jogador vencedor do combate tem direito a realizar uma ação de CURA ou ESPECIAL a sua escolha antes de novo combate. O jogador derrotada deve secar uma nova carta do topo do seu grimório para iniciar um novo combate.</p>
 					<p>O combate se inicia e o processo se repete até que as cartas do grimório de um jogador termine. Quando um jogador não tiver mais cartas para jogar, ele será definitivamente derrotado.</p>
 				</div>
+				<div class="decks">
+					<h1>Escolha seu grimório</h1>
+					<div class="decks" id="decks"></div>
+				</div>
+				<div class="youlose">
+					<h1>Você Perdeu!</h1>
+					<p>Sua derrota ainda não é o fim! Inicie um próximo desafio.</p>
+					<a href="/card-arena/" class="button">COMEÇAR</a>
+				</div>
+				<div class="game">
+					<h1>Configurações de jogo</h1>
+					<h5>Tamanho do deck</h5>
+					<input type="number" name="decksize" id="decksize" value="3">
+					<h5>Plano de fundo</h5>
+					<div class="backgrounds">
+						<div class="bg"><img src="/card-arena/assets/img/images/bg1.gif"></div>
+						<div class="bg"><img src="/card-arena/assets/img/images/bg2.gif"></div>
+						<div class="bg"><img src="/card-arena/assets/img/images/bg3.gif"></div>
+						<div class="bg"><img src="/card-arena/assets/img/images/bg4.gif"></div>
+						<div class="bg"><img src="/card-arena/assets/img/images/bg5.gif"></div>
+						<div class="bg"><img src="/card-arena/assets/img/images/bg6.gif"></div>
+						<div class="bg"><img src="/card-arena/assets/img/images/bg7.gif"></div>
+						<div class="bg"><img src="/card-arena/assets/img/images/bg8.gif"></div>
+						<div class="bg"><img src="/card-arena/assets/img/images/bg9.gif"></div>
+						<div class="bg"><img src="/card-arena/assets/img/images/bg10.gif"></div>
+					</div>
+				</div>
 			</div>
-			<div class="config">
-				<h1>Escolha seu grimório</h1>
-				<div class="decks" id="decks"></div>
-			</div>
-			<div class="youlose">
-				<h1>Você Perdeu!</h1>
-				<p>Sua derrota ainda não é o fim! Inicie um próximo desafio.</p>
-				<a href="/" class="button">COMEÇAR</a>
-			</div>
-
 		</div>
 	</div>
 
 	<script type="text/javascript">
-		const MAXCARDS_DECK = 3;
+		let MAXCARDS_DECK = 20;
+		if(localStorage.getItem('decksize') != undefined) {
+			MAXCARDS_DECK = localStorage.getItem('decksize');
+			document.querySelector("#mydecksize").innerHTML = MAXCARDS_DECK;
+			document.querySelector("#decksize").value = MAXCARDS_DECK;
+		}
+		if(localStorage.getItem('background') != undefined) {
+			document.querySelector("body").style.backgroundImage = `url(${localStorage.getItem('background')})`;
+		}
+
 		const App = new Main();
 		App.setDecklist('monsters');
 		
@@ -159,7 +190,8 @@
 			if (position >= deck.length-1) {
 				document.querySelector('.modal').classList.add('fadein');
 				document.querySelector('.rules').style.display = 'none';
-				document.querySelector('.config').style.display = 'none';
+				document.querySelector('.decks').style.display = 'none';
+				document.querySelector('#menu').style.display = 'none';
 				document.querySelector('.youlose').style.display = 'flex';
 				position = 0;
 			} else {
@@ -177,19 +209,39 @@
 		document.querySelector('#rules').addEventListener('click', function() {
 			document.querySelector('.modal').classList.add('fadein');
 			document.querySelector('.modal').classList.remove('fadeout');
-			document.querySelector('.rules').style.display = 'block';
-			document.querySelector('.youlose').style.display = 'none';
-			document.querySelector('.config').style.display = 'none';
+			App.toggleMenu('rules');
 		});
 
 		document.querySelector('#config').addEventListener('click', function() {
+			App.setDecks();
 			document.querySelector('.modal').classList.add('fadein');
 			document.querySelector('.modal').classList.remove('fadeout');
-			document.querySelector('.rules').style.display = 'none';
-			document.querySelector('.youlose').style.display = 'none';
-			document.querySelector('.config').style.display = 'block';
-			App.setDecks();
+			App.toggleMenu('decks');
 		});
+		
+
+		document.querySelector('.life').addEventListener('input', function() {
+            this.textContent = this.textContent.replace(/\D/g, '');
+        });
+        document.querySelector('.damage').addEventListener('input', function() {
+            this.textContent = '+'+this.textContent.replace(/\D/g, '');
+        });
+
+        document.querySelectorAll('#menu div').forEach(element => {
+        	element.addEventListener('click', function() {
+	        	App.toggleMenu(element.dataset.menu);
+	        });	
+        });
+
+        document.querySelectorAll('.bg img').forEach(element => {
+        	element.addEventListener('click', function() {
+	        	const decksize = document.querySelector("#decksize").value;
+	        	const background = this.getAttribute('src');
+	        	localStorage.setItem('decksize', decksize);
+	        	localStorage.setItem('background', background);
+	        	window.location.reload();
+	        });
+        });
 	</script>
 </body>
 </html>

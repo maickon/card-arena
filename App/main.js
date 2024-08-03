@@ -2,6 +2,10 @@ class Main {
 
 	decklist = null;
 
+	constructor() {
+
+	}
+
 	races() {
 		const path = '/card-arena/assets/img/decks/';
 		const races = [
@@ -147,5 +151,14 @@ class Main {
 				}, 1000);
 			});
 		});
+	}
+	toggleMenu(menu) {
+		const menus = ['rules','decks','youlose','game'];		
+		menus.forEach(m => {
+    		document.querySelector(`.${m}`).style.display = 'none';
+		});
+    	document.querySelector(`.${menu}`).classList.add('fadein');
+    	document.querySelector(`.${menu}`).style.display ='flex';
+    	// document.querySelector(`.${menu}`).removeAttribute('style');
 	}
 }
