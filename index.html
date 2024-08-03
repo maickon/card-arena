@@ -104,12 +104,12 @@
 	<script type="text/javascript">
 		const MAXCARDS_DECK = 3;
 		const App = new Main();
+		App.setDecklist('monsters');
+		
 		let position = 0;
 		let deckname = localStorage.getItem('deckname');
 		let facetop = false;
-		let deck = [];
-		
-		App.setDecklist('monsters');
+		let deck = App.decklist;
 
 		if (deckname != undefined) {
 			App.setDecklist(deckname);
