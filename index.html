@@ -8,7 +8,7 @@
 	<script type="text/javascript" src="/card-arena/App/races/angels.js"></script>
 	<script type="text/javascript" src="/card-arena/App/races/demons.js"></script>
 	<script type="text/javascript" src="/card-arena/App/races/dwarves.js"></script>
-	<script type="text/javascript" src="/card-arena/App/races/elfs.js"></script>
+	<script type="text/javascript" src="/card-arena/App/races/elves.js"></script>
 	<script type="text/javascript" src="/card-arena/App/races/humans.js"></script>
 	<script type="text/javascript" src="/card-arena/App/races/monsters.js"></script>
 	<script type="text/javascript" src="/card-arena/App/races/orcs.js"></script>
@@ -145,6 +145,7 @@
 		
 		let position = 0;
 		let deckname = localStorage.getItem('deckname');
+		let decknameViwer = localStorage.getItem('decknameViwer');
 		let facetop = false;
 		let deck = App.decklist;
 
@@ -153,7 +154,7 @@
 			deck = App.decklist;
 		}
 
-		document.querySelector("#mydeck").innerHTML = (deckname == undefined) ? '' : deckname;
+		document.querySelector("#mydeck").innerHTML = (decknameViwer == undefined) ? '' : decknameViwer;
 
 		App.changeCard(0);
 

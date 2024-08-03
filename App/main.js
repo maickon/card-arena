@@ -12,7 +12,7 @@ class Main {
 			{id: 'angels', name: 'Anjos'},
 			{id: 'demons', name: 'Demônios'},
 			{id: 'dwarves', name: 'Anões'},
-			{id: 'elfs', name: 'Elfos'},
+			{id: 'elves', name: 'Elfos'},
 			{id: 'humans', name: 'Humanos'},
 			{id: 'monsters', name: 'Monstros'},
 			{id: 'orcs', name: 'Orcs'},
@@ -107,7 +107,7 @@ class Main {
 			break;
 			case 'dwarves': this.decklist = this.getDeck(this.shuffleArray(dwarves));
 			break;
-			case 'elfs': this.decklist = this.getDeck(this.shuffleArray(elfs));
+			case 'elves': this.decklist = this.getDeck(this.shuffleArray(elves));
 			break;
 			case 'humans': this.decklist = this.getDeck(this.shuffleArray(humans));
 			break;
@@ -142,6 +142,7 @@ class Main {
 				object.setDecklist(element.dataset.id);
 				deck = object.decklist;
 				localStorage.setItem('deckname', element.dataset.id);
+				localStorage.setItem('decknameViwer', element.dataset.name);
 				document.querySelector("#mydeck").innerHTML = element.dataset.name;
 				element.querySelector('img').style.border = '5px solid #00FF00';
 				setTimeout(function() {
