@@ -37,7 +37,7 @@ let dwarves = [
   },
   {
     "name": "Grimm o Bárbaro",
-    "image": "https://image.cdn2.seaart.ai/static/f98e86f99f957715c9b01e4951bed557/1711501787975/b402cb1154962a89d52ca38dae2bb9b1_high.webp",
+    "image": "/card-arena/assets/img/cards/dwarves/b402cb1154962a89d52ca38dae2bb9b1_high.webp",
     "race": "Anão",
     "description": "Anão selvagem, luta com fúria e vigor indomáveis."
   },

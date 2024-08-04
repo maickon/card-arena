@@ -13,7 +13,7 @@ let monsters = [
   },
   {
     "name": "Hydra a Devoradora",
-    "image": "/card-arena/assets/img/cards/monsters/dfq8wi2-404e2349-810c-4433-8c63-9b9c0f345ccc.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FlNjI4MjE2LTJlNGEtNDVkNi04OTQxLTRiNmQzNGY1MjZkM1wvZGZxOHdpMi00MDRlMjM0OS04MTBjLTQ0MzMtOGM2My05YjljMGYzNDVjY2MuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.6gN6AT5HsZgKCSBJMPprABeLE9b7YrBM5ulWQ9JPWbQ",
+    "image": "/card-arena/assets/img/cards/monsters/dfq8wi2-404e2349-810c-4433-8c63-9b9c0f345ccc.jpg",
     "race": "Monstro",
     "description": "Monstro com múltiplas cabeças, cada uma delas sedenta por carne."
   },
